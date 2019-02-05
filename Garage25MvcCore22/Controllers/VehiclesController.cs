@@ -48,8 +48,8 @@ namespace Garage25MvcCore22.Controllers
         // GET: Vehicles/Create
         public IActionResult Create()
         {
-            ViewData["MemberId"] = new SelectList(_context.Member, "Id", "Id");
-            ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Id");
+            ViewData["MemberId"] = new SelectList(_context.Member, "Id", "Name");
+            ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Type");
             return View();
         }
 
@@ -66,8 +66,8 @@ namespace Garage25MvcCore22.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MemberId"] = new SelectList(_context.Member, "Id", "Id", vehicle.MemberId);
-            ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Id", vehicle.VehicleTypeId);
+            ViewData["MemberId"] = new SelectList(_context.Member, "Id", "Name", vehicle.MemberId);
+            ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Type", vehicle.VehicleTypeId);
             return View(vehicle);
         }
 

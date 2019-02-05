@@ -49,7 +49,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="VehicleTypeId" class="control-label"></label>
-                <select asp-for="VehicleTypeId" class ="form-control" asp-items="ViewBag.VehicleTypeId"></select>
+                <select asp-for="VehicleTypeId" class="form-control" asp-items="ViewBag.VehicleTypeId"></select>
+                @*<select asp-for="Id"
+        asp-items="@(new SelectList(Model.VehicleType.Type,"Id","Type"))"></select>*@
+
+           
             </div>
             <div class="form-group">
                 <label asp-for="MemberId" class="control-label"></label>
