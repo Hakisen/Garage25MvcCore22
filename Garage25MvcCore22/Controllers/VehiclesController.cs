@@ -48,8 +48,14 @@ namespace Garage25MvcCore22.Controllers
         // GET: Vehicles/Create
         public IActionResult Create()
         {
+
             ViewData["MemberId"] = new SelectList(_context.Member, "Id", "Id");
             ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Id");
+            //var vehicleType = new VehicleType();
+            //vehicleType.VehicleTypes = _context.VehicleType.ToList();
+
+            //return View(vehicleType);
+
             return View();
         }
 

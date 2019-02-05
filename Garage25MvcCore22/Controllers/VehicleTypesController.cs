@@ -46,7 +46,6 @@ namespace Garage25MvcCore22.Controllers
         public IActionResult Create()
         {
             var vehicleType = new VehicleType();
-            //vehicleType.VehicleTypes = _context.VehicleType.ToList();
             vehicleType.VehicleTypes = _context.VehicleType.ToList();
             return View(vehicleType);
         }
