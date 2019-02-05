@@ -26,10 +26,13 @@ namespace Garage25MvcCore22.Models
                     new VehicleType() { Type = "Bus"},
                     new VehicleType() { Type = "Car" },
                     new VehicleType() { Type = "Motorcycle" },
-                    new VehicleType() { Type = "PickupTruck" } };
-                //people.Add(person);
+                    new VehicleType() { Type = "PickupTruck" },
+                new VehicleType() { Type = "Delivery van" },
+            new VehicleType() { Type = "Freight truck" } };
+        //people.Add(person);
 
-                context.VehicleType.AddRange(vehicleTypes);
+        context.VehicleType.AddRange(vehicleTypes);
+                context.SaveChanges();
             }
         }
 
