@@ -9,22 +9,50 @@
 <div>
     <h4>Member</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNr)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNr)
-        </dd>
-    </dl>
+
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Model
+            </th>
+            <th>
+                Number Of Wheels
+            </th>
+            <th>Register Number</th>
+            <th>Start Time</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle TypeId</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Vehicles)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NrOfWheels)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.VehicleType)</td>
+            <td>@Html.DisplayFor(modelItem => item.VehicleTypeId)</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
