@@ -45,7 +45,10 @@ namespace Garage25MvcCore22.Controllers
         // GET: VehicleTypes/Create
         public IActionResult Create()
         {
-            return View();
+            var vehicleType = new VehicleType();
+            //vehicleType.VehicleTypes = _context.VehicleType.ToList();
+            vehicleType.VehicleTypes = _context.VehicleType.ToList();
+            return View(vehicleType);
         }
 
         // POST: VehicleTypes/Create
@@ -53,7 +56,7 @@ namespace Garage25MvcCore22.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Type")] VehicleType vehicleType)
+        public async Task<IActionResult> Create([Bind("Type")] VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {

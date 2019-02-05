@@ -30,6 +30,7 @@ namespace Garage25MvcCore22.Models
                 //people.Add(person);
 
                 context.VehicleType.AddRange(vehicleTypes);
+                context.SaveChanges();
             }
         }
 
