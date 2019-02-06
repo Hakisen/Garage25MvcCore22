@@ -45,7 +45,7 @@
             </td>
             <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
             <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
-            <td>@Html.DisplayFor(modelItem => item.VehicleType)</td>
+            <td>@Html.DisplayFor(modelItem => item.VehicleType.Type)</td>
             <td>@Html.DisplayFor(modelItem => item.VehicleTypeId)</td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |

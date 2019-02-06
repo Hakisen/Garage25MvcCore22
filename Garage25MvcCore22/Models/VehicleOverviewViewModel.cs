@@ -8,6 +8,9 @@ namespace Garage25MvcCore22.Models
     public class VehicleOverviewViewModel
     {
         public Member Member { get; set; }
-        public int MyProperty { get; set; }
+        public VehicleType VehicleType { get; set; }
+        public string RegNr { get; set; }
+       public DateTime StartTime { get; set; }
+        //public TimeSpan Duration { get; set; }
     }
 }
