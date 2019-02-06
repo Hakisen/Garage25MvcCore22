@@ -19,10 +19,39 @@ namespace Garage25MvcCore22.Controllers
         }
 
         // GET: Members
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string SearchString)
         {
-            return View(await _context.Member.ToListAsync());
+            // var model = await _context.Member.Include(v=>v.Vehicles).ToListAsync().GroupBy(g=>g.Id).Select;
+            //if (!String.IsNullOrEmpty(SearchString))
+            //{
+            //    SearchString= SearchString.ToUpper();
+            //    model = await _context.Member.Where(m => m.Name == SearchString).ToListAsync();
+
+            //}
+
+            //from m in _context.Member
+            //                  join v in _context.Vehicle on m.Id equals v.MemberId into g
+            //select new {  = p.Id, Count = g.Count() }
+
+
+
+            var Results = from m in _context.Member
+                          join v in _context.Vehicle on m.Id equals v.MemberId into VehiclesOwned
+                          where (m.Name == SearchString)
+                          orderby m.Id descending
+                          select new MemberOverviewViewModel
+                          {
+                                Member = m,
+                              Count = VehiclesOwned.Count()
+                          };
+
+
+
+            return View(Results.ToList());
         }
+
+       
+
 
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -32,7 +61,7 @@ namespace Garage25MvcCore22.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member
+            var member = await _context.Member.Include(v=>v.Vehicles)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (member == null)
             {
@@ -148,5 +177,8 @@ namespace Garage25MvcCore22.Controllers
         {
             return _context.Member.Any(e => e.Id == id);
         }
+
+      
+
     }
 }
