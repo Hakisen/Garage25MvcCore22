@@ -32,18 +32,28 @@ namespace Garage25MvcCore22.Controllers
             //from m in _context.Member
             //                  join v in _context.Vehicle on m.Id equals v.MemberId into g
             //select new {  = p.Id, Count = g.Count() }
-
-
-
             var Results = from m in _context.Member
                           join v in _context.Vehicle on m.Id equals v.MemberId into VehiclesOwned
-                          where (m.Name == SearchString)
                           orderby m.Id descending
                           select new MemberOverviewViewModel
                           {
-                                Member = m,
+                              Member = m,
                               Count = VehiclesOwned.Count()
                           };
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                Results = from m in _context.Member
+                              join v in _context.Vehicle on m.Id equals v.MemberId into VehiclesOwned
+                              where (m.Name == SearchString)
+                              orderby m.Id descending
+                              select new MemberOverviewViewModel
+                              {
+                                  Member = m,
+                                  Count = VehiclesOwned.Count()
+                              };
+            }
+
+      
 
 
 
