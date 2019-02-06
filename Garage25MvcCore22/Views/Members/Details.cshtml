@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Members vehicle(s)</h1>
 
 <div>
     <h4>Member</h4>
@@ -24,12 +24,12 @@
                 Model
             </th>
             <th>
-                Number Of Wheels
+                Num Of Wheels
             </th>
 
             <th>Reg. Number</th>
             <th>Start Time</th>
-            <th>Vehicle Type</th>
+            <th>Parked</th>
             <th>Vehicle TypeId</th>
             <th></th>
         </tr>
@@ -37,31 +37,31 @@
     <tbody>
         @foreach (var item in Model.Vehicles)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NrOfWheels)
-                </td>
-                <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
-                <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
-                <td>@Html.DisplayFor(modelItem => item.VehicleType)</td>
-                <td>@Html.DisplayFor(modelItem => item.VehicleTypeId)</td>
-                <td>
-                    <!---
-                    <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
-                    -->
-                    <a href='@Url.Action( "Edit","Vehicles", new {  id = @item.Id })'>Edit</a>
-                    <a href='@Url.Action( "Details","Vehicles", new {  id = @item.Id })'>Details</a>
-                    
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NrOfWheels)
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.Parked)</td>
+            <td>@Html.DisplayFor(modelItem => item.VehicleTypeId)</td>
+            <td>
+                <!---
+        <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
+        -->
+                <a href='@Url.Action( "Edit","Vehicles", new {  id = @item.Id })'>Edit</a>
+                <a href='@Url.Action( "Details","Vehicles", new {  id = @item.Id })'>Details</a>
+
+            </td>
+        </tr>
         }
     </tbody>
 </table>
