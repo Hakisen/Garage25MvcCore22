@@ -42,9 +42,10 @@ namespace Garage25MvcCore22.Controllers
                           };
             if (!String.IsNullOrEmpty(SearchString))
             {
+                SearchString = SearchString.ToUpper();
                 Results = from m in _context.Member
                               join v in _context.Vehicle on m.Id equals v.MemberId into VehiclesOwned
-                              where (m.Name == SearchString)
+                              where (m.Name.Contains(SearchString))
                               orderby m.Id descending
                               select new MemberOverviewViewModel
                               {

@@ -19,11 +19,53 @@ namespace Garage25MvcCore22.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string SearchString)
         {
-            var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
-            return View(await garage25MvcCore22Context.ToListAsync());
-        }
+            //    var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
+            //    return View(await garage25MvcCore22Context.ToListAsync());
+
+            var EndTime = DateTime.Now;
+         var Results = from m in _context.Member
+                       join v in _context.Vehicle on m.Id equals v.MemberId 
+                       join t in _context.VehicleType on v.VehicleTypeId equals t.Id
+                       orderby v.MemberId descending
+                       select new VehicleOverviewViewModel
+                       {
+                           Member = m,
+                           VehicleType=t,
+                           RegNr=v.RegNr,
+                           StartTime=v.StartTime
+                       };
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                SearchString = SearchString.ToUpper();
+                Results = from m in _context.Member
+                          join v in _context.Vehicle on m.Id equals v.MemberId
+                          join t in _context.VehicleType on v.VehicleTypeId equals t.Id
+                          where (v.RegNr.Contains(SearchString) || v.VehicleType.Type.Contains(SearchString))
+                          select new VehicleOverviewViewModel
+                          {
+                              Member = m,
+                              VehicleType = t,
+                              RegNr = v.RegNr,
+                              StartTime =v.StartTime
+                          };
+                }
+           
+            return View(Results);
+    }
+
+
+//        from d in Duty
+//join c in Company on d.CompanyId equals c.id
+//join s in SewagePlant on c.SewagePlantId equals s.id
+// .Select(m => new
+//  {
+//      duty = s.Duty.Duty, 
+//      CatId = s.Company.CompanyName,
+//      SewagePlantName=s.SewagePlant.SewagePlantName
+//        // other assignments
+//    });
 
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
