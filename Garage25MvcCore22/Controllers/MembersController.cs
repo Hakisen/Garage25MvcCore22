@@ -34,7 +34,7 @@ namespace Garage25MvcCore22.Controllers
             //select new {  = p.Id, Count = g.Count() }
             var Results = from m in _context.Member
                           join v in _context.Vehicle on m.Id equals v.MemberId into VehiclesOwned
-                          orderby m.Id descending
+                          orderby m.Name ascending
                           select new MemberOverviewViewModel
                           {
                               Member = m,
