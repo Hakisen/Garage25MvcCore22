@@ -28,7 +28,7 @@ namespace Garage25MvcCore22.Controllers
          var Results = from m in _context.Member
                        join v in _context.Vehicle on m.Id equals v.MemberId 
                        join t in _context.VehicleType on v.VehicleTypeId equals t.Id
-                       orderby v.MemberId descending
+                       orderby v.StartTime ascending
                        select new VehicleOverviewViewModel
                        {
                            Member = m,
