@@ -26,7 +26,7 @@ namespace Garage25MvcCore22.Models
 
         [Display(Name = "Total Park Time")]
         [DataType(DataType.DateTime)]
-        public DateTime Duration { get; set; }
+        public TimeSpan Duration { get; set; }
 
         [Display(Name = "Total Price")]
         public int TotalPrice { get; set; }

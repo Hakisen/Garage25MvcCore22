@@ -34,6 +34,7 @@ namespace Garage25MvcCore22.Controllers
                            Member = m,
                            VehicleType=t,
                            RegNr=v.RegNr,
+                           VehicleId = v.Id,
                            StartTime=v.StartTime
                        };
             if (!string.IsNullOrEmpty(SearchString))
@@ -48,7 +49,8 @@ namespace Garage25MvcCore22.Controllers
                               Member = m,
                               VehicleType = t,
                               RegNr = v.RegNr,
-                              StartTime =v.StartTime
+                              VehicleId = v.Id,
+                              StartTime = v.StartTime
                           };
                 }
            
@@ -104,6 +106,8 @@ namespace Garage25MvcCore22.Controllers
         {
             if (ModelState.IsValid)
             {
+                vehicle.StartTime = DateTime.Now;
+                vehicle.Parked = true;
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -167,6 +171,52 @@ namespace Garage25MvcCore22.Controllers
             ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Type", vehicle.VehicleTypeId);
             return View(vehicle);
         }
+
+        public async Task<IActionResult> CheckOut(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle
+                .Include(v => v.Member)
+                .Include(v => v.VehicleType)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            return View(vehicle);
+        }
+
+        // POST: Vehicles/Delete/5
+        [HttpPost, ActionName("CheckOut")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckOutConfirmed(int id)
+        {
+            Receipt receipt = new Receipt();
+
+            //var receipts = _context.Receipt.ToListAsync();
+
+            var vehicle = _context.Vehicle.Include(m => m.Member).FirstOrDefault(p => p.Id == id);            
+            receipt.RegNr = vehicle.RegNr;
+            receipt.MemberName = vehicle.Member.Name;
+            receipt.StartTime = vehicle.StartTime;
+            receipt.EndTime = DateTime.Now;
+            receipt.Duration = receipt.EndTime.Subtract(receipt.StartTime);
+            receipt.TotalPrice = (int)Math.Round(receipt.Duration.TotalMinutes * 0.5);
+
+            vehicle.Parked = false;
+            _context.Vehicle.Update(vehicle);
+            _context.Receipt.Add(receipt);
+           
+            await _context.SaveChangesAsync();
+
+            return View("CheckOutReceipt", receipt);
+        }
+
 
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)

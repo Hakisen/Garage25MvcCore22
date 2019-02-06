@@ -45,6 +45,7 @@ namespace Garage25MvcCore22.Controllers
         // GET: VehicleTypes/Create
         public IActionResult Create()
         {
+            // to get the drop down list populated
             var vehicleType = new VehicleType();
             vehicleType.VehicleTypes = _context.VehicleType.ToList();
             return View(vehicleType);
