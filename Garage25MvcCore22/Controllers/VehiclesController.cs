@@ -23,6 +23,8 @@ namespace Garage25MvcCore22.Controllers
         {
             var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
             return View(await garage25MvcCore22Context.ToListAsync());
+
+            //Test code                
         }
 
         // GET: Vehicles/Details/5
@@ -68,6 +70,8 @@ namespace Garage25MvcCore22.Controllers
         {
             if (ModelState.IsValid)
             {
+                vehicle.StartTime = DateTime.Now;
+                vehicle.Parked = true;
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
