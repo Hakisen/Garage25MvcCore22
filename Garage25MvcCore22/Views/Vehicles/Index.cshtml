@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Garage25MvcCore22.Models.VehicleOverviewViewModel>
+﻿@model IEnumerable<Garage25MvcCore22.Models.Vehicle>
 
 @{
-    ViewData["Title"] = "Parked vehicles";
+    ViewData["Title"] = "All Vehicles";
 }
 
-<h1>Parked Vehicles</h1>
+<h1>All Vehicles</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Check In New Vehicle</a>
 </p>
 
 @using (Html.BeginForm())
@@ -33,21 +33,45 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
-            <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
-            <td>@Html.DisplayFor(modelItem => item.VehicleType.Type)</td>
-            <td>@Html.DisplayFor(modelItem => item.Member.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Member.PhoneNr)</td>
-            
-
-
-            @*<td>
-            <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
-        </td>*@
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NrOfWheels)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Color)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parked)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VehicleType.Type)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (item.Parked == false)
+                    {
+                        <span> | </span> 
+                        <a asp-action="CheckIn" asp-route-id="@item.Id">CheckIn</a>
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>
