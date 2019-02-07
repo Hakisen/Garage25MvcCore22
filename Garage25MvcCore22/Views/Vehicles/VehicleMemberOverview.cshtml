@@ -7,16 +7,17 @@
     ViewData["Title"] = "VehicleMemberOverview";
 }
 
-<div class=""alert alert-danger"">
-     TempData["NotParked"]
+<h2>Parked Vehicles</h2><br />
+
+<div class="text-danger">
+    @TempData["NotParked"]    
     </div>
-<h1>VehicleMemberOverview</h1>
-
-<h1>Vehicles</h1>
-
-<p>
+<div class="text-success">
+    @TempData["ParkedOk"]
+</div><br />
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 
 @using (Html.BeginForm())
 {
