@@ -142,6 +142,8 @@ namespace Garage25MvcCore22.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RegNr,NrOfWheels,Color,Model,Brand,StartTime,Parked,VehicleTypeId,MemberId")] Vehicle vehicle)
         {
+            vehicle.RegNr = vehicle.RegNr.ToUpper();
+
             if (ModelState.IsValid)
             {
                 vehicle.StartTime = DateTime.Now;
@@ -210,6 +212,29 @@ namespace Garage25MvcCore22.Controllers
             return View(vehicle);
         }
 
+        public async Task<IActionResult> CheckIn(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle.FindAsync(id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            vehicle.Parked = true;
+            vehicle.StartTime = DateTime.Now;
+            _context.Vehicle.Update(vehicle);
+            await _context.SaveChangesAsync();
+
+            TempData["ParkedOk"] = $"Vehcile; reg.Nr. {vehicle.RegNr} succefully parked";
+            return RedirectToAction("VehicleMemberOverview");
+
+        }
+
         public async Task<IActionResult> CheckOut(int? id)
         {
             if (id == null)
@@ -256,7 +281,7 @@ namespace Garage25MvcCore22.Controllers
             var hours = receipt.parkedTime / 60;
             var minutes = receipt.parkedTime;
            
-            receipt.ParkedTimeFormatted = string.Format("{0} dagar,{1} timmar,{2} minuter", between.TotalDays, between.TotalHours, between.TotalMinutes);
+            receipt.ParkedTimeFormatted = string.Format("{0} days, {1} hrs, {2} min", between.Days, between.Hours, between.Minutes);
             receipt.TotalPrice = (receipt.parkedTime) *1;
 
             vehicle.Parked = false;
