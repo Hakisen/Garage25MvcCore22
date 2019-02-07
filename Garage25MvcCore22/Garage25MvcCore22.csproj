@@ -11,4 +11,7 @@
   <ItemGroup>
     <Compile Remove="Views\MemberOverviewViewModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\ViewModelsViews\" />
+  </ItemGroup>
 </Project>

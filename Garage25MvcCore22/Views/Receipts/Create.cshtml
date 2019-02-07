@@ -1,4 +1,4 @@
-﻿@model Garage25MvcCore22.Models.Receipt
+﻿@*@model Garage25MvcCore22.Models.Receipt
 
 @{
     ViewData["Title"] = "Create";
@@ -33,9 +33,9 @@
                 <span asp-validation-for="EndTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Duration" class="control-label"></label>
-                <input asp-for="Duration" class="form-control" />
-                <span asp-validation-for="Duration" class="text-danger"></span>
+                <label asp-for="parkedTime " class="control-label"></label>
+                <input asp-for="parkedTime " class="form-control" />
+                <span asp-validation-for="parkedTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TotalPrice" class="control-label"></label>
@@ -55,4 +55,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+}*@
