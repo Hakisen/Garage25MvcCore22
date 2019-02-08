@@ -9,10 +9,11 @@
 </p>
 @using (Html.BeginForm())
 {
-    <p>
-        Search By Name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
+<p>
+    <i class="fas fa-search"></i>
+    Search By Name: @Html.TextBox("SearchString")
+    <input type="submit" value="Search" />
+</p>
 }
 <table class="table">
     <thead>
@@ -34,9 +35,12 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Member.Name)
-                </td>
+                    <i class="fas fa-user"> </i>
+                        @Html.DisplayFor(modelItem => item.Member.Name)
+                            
+</td>
                 <td>
+                    <i class="fas fa-mobile-alt"></i>
                     @Html.DisplayFor(modelItem => item.Member.PhoneNr)
                 </td>
 
