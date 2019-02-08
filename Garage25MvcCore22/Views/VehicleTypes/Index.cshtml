@@ -3,67 +3,70 @@
 @{
     ViewData["Title"] = "Vehicle types";
 }
+<link href="~/css/Garage25.css" rel="stylesheet" />
+<div class="g25View">
+    <h1>Vehicle types</h1>
 
-<h1>Vehicle types</h1>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @switch (item.Type)
+                        {
+                            case "Bus":
+                                <i class="fas fa-bus"></i>;
+                                break;
+                            case "Bicycle":
+                                <i class="fas fa-bicycle"></i>;
+                                break;
+                            case "Car":
+                                <i class="fas fa-car"></i>;
+                                break;
+                            case "PickupTruck":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Delivery Van":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Freight Truck":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Man with a van":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Motorcycle":
+                                <i class="fas fa-motorcycle"></i>;
+                                break;
+                            case "Pulka":
+                                <i class="fas fa-sleigh"></i>;
+                                break;
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @switch (item.Type)
-                {
-                    case "Bus":
-                        <i class="fas fa-bus"></i>;
-                        break;
-                    case "Bicycle":
-                        <i class="fas fa-bicycle"></i>;
-                        break;
-                    case "Car":
-                        <i class="fas fa-car"></i>;
-                        break;
-                    case "PickupTruck":
-                        <i class="fas fa-truck"></i>;
-                        break;
-                    case "Delivery Van":
-                        <i class="fas fa-truck"></i>;
-                        break;
-                    case "Freight Truck":
-                        <i class="fas fa-truck"></i>;
-                        break;
-                    case "Man with a van":
-                        <i class="fas fa-truck"></i>;
-                        break;
-                    case "Motorcycle":
-                        <i class="fas fa-motorcycle"></i>;
-                        break;
-                    case "Pulka":
-                        <i class="fas fa-sleigh"></i>;
-                        break;
+                            default:
+                                break;
+                        }
 
-                    default:
-                        break;
-                }
-
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

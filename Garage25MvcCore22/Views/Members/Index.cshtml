@@ -2,55 +2,58 @@
 @{
     ViewData["Title"] = "Members";
 }
-<h1>Members</h1>
-<p>
-    <a asp-action="Create">Enroll New</a>
-</p>
-</p>
-@using (Html.BeginForm())
-{
-<p>
-    <i class="fas fa-search"></i>
-    Search By Name: @Html.TextBox("SearchString")
-    <input type="submit" value="Search" />
-</p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Phone Number
-            </th>
-
-            <th>Vehicles</th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<link href="~/css/Garage25.css" rel="stylesheet" />
+<div class="g25View">
+    <h1>Members</h1>
+    <p>
+        <a asp-action="Create">Enroll New</a>
+    </p>
+    </p>
+    @using (Html.BeginForm())
+    {
+        <p>
+            <i class="fas fa-search"></i>
+            Search By Name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    <i class="fas fa-user"> </i>
-                        @Html.DisplayFor(modelItem => item.Member.Name)
-                            
-</td>
-                <td>
-                    <i class="fas fa-mobile-alt"></i>
-                    @Html.DisplayFor(modelItem => item.Member.PhoneNr)
-                </td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Phone Number
+                </th>
 
-                <td>@Html.DisplayFor(modelItem => item.Count)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Member.Id">Vehicles</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
-                </td>
+                <th>Vehicles</th>
+
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <i class="fas fa-user"> </i>
+                        @Html.DisplayFor(modelItem => item.Member.Name)
+
+                    </td>
+                    <td>
+                        <i class="fas fa-mobile-alt"></i>
+                        @Html.DisplayFor(modelItem => item.Member.PhoneNr)
+                    </td>
+
+                    <td>@Html.DisplayFor(modelItem => item.Count)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Member.Id">Vehicles</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

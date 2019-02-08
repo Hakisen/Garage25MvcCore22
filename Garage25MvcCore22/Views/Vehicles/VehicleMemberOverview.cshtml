@@ -6,113 +6,116 @@
 @{
     ViewData["Title"] = "VehicleMemberOverview";
 }
+<link href="~/css/Garage25.css" rel="stylesheet" />
+<div class="g25View">
+    <h2>Parked Vehicles</h2><br />
 
-<h2>Parked Vehicles</h2><br />
-
-<div class="text-danger">
-    @TempData["NotParked"]    
+    <div class="text-danger">
+        @TempData["NotParked"]
     </div>
-<div class="text-success">
-    @TempData["ParkedOk"]
-</div><br />
-@*<p>
-    <a asp-action="Create">Create New</a>
-</p>*@
+    <div class="text-success">
+        @TempData["ParkedOk"]
+    </div><br />
+    @*<p>
+            <a asp-action="Create">Create New</a>
+        </p>*@
 
-@using (Html.BeginForm())
-{
-      <p>
-          <i class="fas fa-search"></i>
-          Search By Reg.Nr Or Type: @Html.TextBox("SearchString")
-          <input type="submit" value="Search" />
-      </p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Phone Number
-            </th>
-
-            <th>Vehicle Type</th>
-
-            <th> Register Number</th>
-
-            <th> Start Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    @using (Html.BeginForm())
+    {
+        <p>
+            <i class="fas fa-search"></i>
+            Search By Reg.Nr Or Type: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }
+    <table class="table">
+        <thead>
             <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Phone Number
+                </th>
 
+                <th>Vehicle Type</th>
 
-                <td>
-                    <i class="fas fa-user"> </i>
-                    @Html.DisplayFor(modelItem => item.Member.Name)
-                </td>
-                <td>
-                    <i class="fas fa-mobile-alt"></i>
-                    @Html.DisplayFor(modelItem => item.Member.PhoneNr)
-                </td>
+                <th> Register Number</th>
 
-                <td>
-
-                    @switch (item.VehicleType.Type)
-                    {
-                        case "Bus":
-                            <i class="fas fa-bus"></i>;
-                            break;
-                        case "Bicycle":
-                            <i class="fas fa-bicycle"></i>;
-                            break;
-                        case "Car":
-                            <i class="fas fa-car"></i>;
-                            break;
-                        case "PickupTruck":
-                            <i class="fas fa-truck"></i>;
-                            break;
-                        case "Delivery Van":
-                            <i class="fas fa-truck"></i>;
-                            break;
-                        case "Freight Truck":
-                            <i class="fas fa-truck"></i>;
-                            break;
-                        case "Man with a van":
-                            <i class="fas fa-truck"></i>;
-                            break;
-                        case "Motorcycle":
-                            <i class="fas fa-motorcycle"></i>;
-                            break;
-                        case "Pulka":
-                            <i class="fas fa-sleigh"></i>;
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    @Html.DisplayFor(modelItem => item.VehicleType.Type)
-                </td>
-
-                <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
-
-
-                <td>
-                    <i class="fas fa-clock"></i>
-                @Html.DisplayFor(modelItem => item.StartTime)</td>
-
-
-
-                <td>
-                    @*<a asp-action="Edit" asp-route-id="@item.Member.">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |*@
-                    <a asp-action="CheckOut" asp-route-id="@item.VehicleId">CheckOut</a>
-                </td>
+                <th> Start Time</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>
+                        <i class="fas fa-user"> </i>
+                        @Html.DisplayFor(modelItem => item.Member.Name)
+                    </td>
+                    <td>
+                        <i class="fas fa-mobile-alt"></i>
+                        @Html.DisplayFor(modelItem => item.Member.PhoneNr)
+                    </td>
+
+                    <td>
+
+                        @switch (item.VehicleType.Type)
+                        {
+                            case "Bus":
+                                <i class="fas fa-bus"></i>;
+                                break;
+                            case "Bicycle":
+                                <i class="fas fa-bicycle"></i>;
+                                break;
+                            case "Car":
+                                <i class="fas fa-car"></i>;
+                                break;
+                            case "PickupTruck":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Delivery Van":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Freight Truck":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Man with a van":
+                                <i class="fas fa-truck"></i>;
+                                break;
+                            case "Motorcycle":
+                                <i class="fas fa-motorcycle"></i>;
+                                break;
+                            case "Pulka":
+                                <i class="fas fa-sleigh"></i>;
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        @Html.DisplayFor(modelItem => item.VehicleType.Type)
+                    </td>
+
+                    <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
+
+
+                    <td>
+                        <i class="fas fa-clock"></i>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+
+
+
+                    <td>
+                        @*<a asp-action="Edit" asp-route-id="@item.Member.">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |*@
+                        <a asp-action="CheckOut" asp-route-id="@item.VehicleId">CheckOut</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
