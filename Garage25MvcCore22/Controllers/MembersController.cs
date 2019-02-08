@@ -55,8 +55,15 @@ namespace Garage25MvcCore22.Controllers
                               };
             }
 
+      
+
+
+
             return View(Results.ToList());
         }
+
+       
+
 
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -66,7 +73,7 @@ namespace Garage25MvcCore22.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member.Include(v=>v.Vehicles).ThenInclude(t => t.VehicleType)
+            var member = await _context.Member.Include(v=>v.Vehicles)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (member == null)
             {

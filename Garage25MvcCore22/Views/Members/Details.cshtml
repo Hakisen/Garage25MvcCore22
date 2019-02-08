@@ -7,12 +7,12 @@
 <h1>Member vehicle(s)</h1>
 
 <div>
-    <h4>@Model.Name</h4>
+    <h4>Member</h4>
     <hr />
 
 </div>
 <div>
-    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit Member</a> |*@
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit Member</a> |
     <a asp-action="Index">Back to List</a>
 </div>
 
@@ -30,8 +30,7 @@
             <th>Reg. Number</th>
             <th>Start Time</th>
             <th>Parked</th>
-            <th>Vehicle Type</th>
-            <th>Vehicles</th>
+            <th>Vehicle TypeId</th>
             <th></th>
         </tr>
     </thead>
@@ -51,7 +50,7 @@
             <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
             <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
             <td>@Html.DisplayFor(modelItem => item.Parked)</td>
-            <td>@Html.DisplayFor(modelItem => item.VehicleType.Type)</td>
+            <td>@Html.DisplayFor(modelItem => item.VehicleTypeId)</td>
             <td>
                 <!---
         <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
@@ -59,7 +58,7 @@
         <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
         -->
                 <a href='@Url.Action( "Edit","Vehicles", new {  id = @item.Id })'>Edit</a>
-                <a href='@Url.Action( "Details","Vehicles", new {  id = @item.Id })'>Details</a>              
+                <a href='@Url.Action( "Details","Vehicles", new {  id = @item.Id })'>Details</a>
 
             </td>
         </tr>
