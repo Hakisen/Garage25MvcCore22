@@ -9,6 +9,14 @@
 <p>
     <a asp-action="Create">Check In New Vehicle</a>
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search By Reg.Nr: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -79,7 +87,7 @@
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     @if (item.Parked == false)
                     {
-                        <span> | </span> 
+                        <span> | </span>
                         <a asp-action="CheckIn" asp-route-id="@item.Id">CheckIn</a>
                     }
                 </td>

@@ -73,7 +73,7 @@ namespace Garage25MvcCore22.Controllers
                 return NotFound();
             }
 
-            var member = await _context.Member.Include(v=>v.Vehicles)
+            var member = await _context.Member.Include(v=>v.Vehicles).ThenInclude(t=>t.VehicleType)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (member == null)
             {

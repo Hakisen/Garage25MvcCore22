@@ -19,10 +19,17 @@ namespace Garage25MvcCore22.Controllers
         }
 
         // GET: Vehicles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
-            return View(await garage25MvcCore22Context.ToListAsync());
+            var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType).ToListAsync();
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType).Where(vv=>vv.RegNr.Contains(SearchString)).ToListAsync();
+
+            }
+
+            return View(await garage25MvcCore22Context);
 
             //   var EndTime = DateTime.Now;
             //var Results = from m in _context.Member
