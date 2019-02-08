@@ -1,0 +1,25 @@
+﻿body, html {
+    height: 100%;
+    background-image: url('../images/park_tower.jpg');
+    background-repeat: no-repeat;
+    
+    background-size: cover;
+ 
+    
+}
+.g25Heading {
+    background-image: linear-gradient(to bottom right, white, lightblue);
+    border: 1px solid white;
+    border-radius: 25px;
+}
+
+.bg {
+        
+    background-image: url('../images/park_tower.jpg');
+    
+    /**/height: 100%;*/
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
