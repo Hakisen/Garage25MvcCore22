@@ -14,6 +14,7 @@ namespace Garage25MvcCore22.Models
         public int VehicleId { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
+        public bool Pstatus { get; internal set; }
         //public TimeSpan Duration { get; set; }
     }
 }
