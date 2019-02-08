@@ -62,7 +62,7 @@ namespace Garage25MvcCore22
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Members}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -37,7 +37,7 @@
                 <input asp-for="Brand" class="form-control" />
                 <span asp-validation-for="Brand" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
                 <input asp-for="StartTime" class="form-control" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
@@ -46,7 +46,7 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Parked" /> @Html.DisplayNameFor(model => model.Parked)
                 </label>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="VehicleTypeId" class="control-label"></label>
                 <select asp-for="VehicleTypeId" class="form-control" asp-items="ViewBag.VehicleTypeId"></select>

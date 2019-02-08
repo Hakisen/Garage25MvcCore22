@@ -20,15 +20,21 @@ namespace Garage25MvcCore22.Models
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }
 
-        [Display(Name = "Chekc Out Time")]
+        [Display(Name = "Check Out Time")]
         [DataType(DataType.DateTime)]
         public DateTime EndTime { get; set; }
 
-        [Display(Name = "Total Park Time")]
-        [DataType(DataType.DateTime)]
-        public DateTime Duration { get; set; }
+        public int parkedTime { get; set; }
+
+        [Display(Name ="Parked Time")]
+        public string ParkedTimeFormatted { get; set; }
+        //[Display(Name = "Total Park Time")]
+        //[DataType(DataType.Duration)]
+        //public TimeSpan Duration { get; set; }
 
         [Display(Name = "Total Price")]
+        //[DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString ="{0:C0}")]
         public int TotalPrice { get; set; }
     }
 }
