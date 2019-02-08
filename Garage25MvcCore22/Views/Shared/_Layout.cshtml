@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    
+
     <title>@ViewData["Title"] - Garage25MvcCore22</title>
-   
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
@@ -34,24 +35,24 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Index">Members</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Index"><i class="fas fa-user"></i> Members</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index">All Vehicles</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="VehicleMemberOverview">Parked Vehicles</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="Index"><i class="fas fa-car-side"></i> All Vehicles</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Receipts" asp-action="Index">Receipts</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vehicles" asp-action="VehicleMemberOverview"><i class="fas fa-parking"></i> Parked Vehicles</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Receipts" asp-action="Index"><i class="fas fa-receipt"></i> Receipts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="VehicleTypes" asp-action="Index">Vehicle types</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="VehicleTypes" asp-action="Index"><i class="fas fa-layer-group"></i> Vehicle types</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-user-secret"></i> Privacy</a>
                         </li>
                     </ul>
 

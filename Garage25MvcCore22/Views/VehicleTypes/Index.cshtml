@@ -22,6 +22,40 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @switch (item.Type)
+                {
+                    case "Bus":
+                        <i class="fas fa-bus"></i>;
+                        break;
+                    case "Bicycle":
+                        <i class="fas fa-bicycle"></i>;
+                        break;
+                    case "Car":
+                        <i class="fas fa-car"></i>;
+                        break;
+                    case "PickupTruck":
+                        <i class="fas fa-truck"></i>;
+                        break;
+                    case "Delivery Van":
+                        <i class="fas fa-truck"></i>;
+                        break;
+                    case "Freight Truck":
+                        <i class="fas fa-truck"></i>;
+                        break;
+                    case "Man with a van":
+                        <i class="fas fa-truck"></i>;
+                        break;
+                    case "Motorcycle":
+                        <i class="fas fa-motorcycle"></i>;
+                        break;
+                    case "Pulka":
+                        <i class="fas fa-sleigh"></i>;
+                        break;
+
+                    default:
+                        break;
+                }
+
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
