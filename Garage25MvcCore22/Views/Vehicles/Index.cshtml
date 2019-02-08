@@ -1,97 +1,53 @@
-﻿@model IEnumerable<Garage25MvcCore22.Models.Vehicle>
+﻿@model IEnumerable<Garage25MvcCore22.Models.VehicleOverviewViewModel>
 
 @{
-    ViewData["Title"] = "All Vehicles";
+    ViewData["Title"] = "Parked vehicles";
 }
 
-<h1>All Vehicles</h1>
+<h1>Parked Vehicles</h1>
 
 <p>
-    <a asp-action="Create">Check In New Vehicle</a>
+    <a asp-action="Create">Create New</a>
 </p>
 
 @using (Html.BeginForm())
 {
     <p>
-        Search By Reg.Nr: @Html.TextBox("SearchString")
+        Search By Reg.Nr Or Type: @Html.TextBox("SearchString")
         <input type="submit" value="Search" />
     </p>
 }
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RegNr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NrOfWheels)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Parked)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Member)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleType)
-            </th>
-            <th></th>
+            <th>CheckIn time</th>
+            <th>Reg. Number</th>
+            <th>Type</th>
+            <th>Owner</th>
+            <th>Phone</th>
+            
+
+
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RegNr)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NrOfWheels)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Parked)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Member.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VehicleType.Type)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    @if (item.Parked == false)
-                    {
-                        <span> | </span>
-                        <a asp-action="CheckIn" asp-route-id="@item.Id">CheckIn</a>
-                    }
-                </td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
+            <td>@Html.DisplayFor(modelItem => item.VehicleType.Type)</td>
+            <td>@Html.DisplayFor(modelItem => item.Member.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Member.PhoneNr)</td>
+            
+
+
+            @*<td>
+            <a asp-action="Edit" asp-route-id="@item.Member.Id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.Member.Id">Delete</a>
+        </td>*@
+        </tr>
         }
     </tbody>
 </table>

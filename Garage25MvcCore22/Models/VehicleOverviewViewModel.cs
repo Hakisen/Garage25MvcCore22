@@ -12,6 +12,7 @@ namespace Garage25MvcCore22.Models
         public string RegNr { get; set; }
         public int VehicleId { get; set; }
         public DateTime StartTime { get; set; }
+        public bool Pstatus { get; internal set; }
         //public TimeSpan Duration { get; set; }
     }
 }
