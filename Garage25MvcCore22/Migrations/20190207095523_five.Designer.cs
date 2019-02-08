@@ -4,14 +4,16 @@ using Garage25MvcCore22.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Garage25MvcCore22.Migrations
 {
     [DbContext(typeof(Garage25MvcCore22Context))]
-    partial class Garage25MvcCore22ContextModelSnapshot : ModelSnapshot
+    [Migration("20190207095523_five")]
+    partial class five
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,19 +42,17 @@ namespace Garage25MvcCore22.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<TimeSpan>("Duration");
+
                     b.Property<DateTime>("EndTime");
 
                     b.Property<string>("MemberName");
-
-                    b.Property<string>("ParkedTimeFormatted");
 
                     b.Property<string>("RegNr");
 
                     b.Property<DateTime>("StartTime");
 
                     b.Property<int>("TotalPrice");
-
-                    b.Property<int>("parkedTime");
 
                     b.HasKey("Id");
 

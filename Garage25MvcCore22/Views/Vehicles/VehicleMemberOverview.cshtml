@@ -1,0 +1,77 @@
+﻿
+
+
+@model IEnumerable<Garage25MvcCore22.Models.VehicleOverviewViewModel>
+
+@{
+    ViewData["Title"] = "VehicleMemberOverview";
+}
+
+<h2>Parked Vehicles</h2><br />
+
+<div class="text-danger">
+    @TempData["NotParked"]    
+    </div>
+<div class="text-success">
+    @TempData["ParkedOk"]
+</div><br />
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search By Reg.Nr Or Type: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone Number
+            </th>
+
+            <th>Vehicle Type</th>
+
+            <th> Register Number</th>
+
+            <th> Start Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Member.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Member.PhoneNr)
+                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.VehicleType.Type)</td>
+
+                <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
+
+
+                <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+
+
+
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.Member.">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Member.Id">Details</a> |*@
+                    <a asp-action="CheckOut" asp-route-id="@item.VehicleId">CheckOut</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

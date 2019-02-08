@@ -19,40 +19,42 @@ namespace Garage25MvcCore22.Controllers
         }
 
         // GET: Vehicles
-        public IActionResult Index(string SearchString)
+        public async Task<IActionResult> Index()
         {
-            //    var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
-            //    return View(await garage25MvcCore22Context.ToListAsync());
+            var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
+            return View(await garage25MvcCore22Context.ToListAsync());
 
-            var EndTime = DateTime.Now;
-         var Results = from m in _context.Member
-                       join v in _context.Vehicle on m.Id equals v.MemberId 
-                       join t in _context.VehicleType on v.VehicleTypeId equals t.Id
-                       orderby v.StartTime ascending
-                       select new VehicleOverviewViewModel
-                       {
-                           Member = m,
-                           VehicleType=t,
-                           RegNr=v.RegNr,
-                           StartTime=v.StartTime
-                       };
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                SearchString = SearchString.ToUpper();
-                Results = from m in _context.Member
-                          join v in _context.Vehicle on m.Id equals v.MemberId
-                          join t in _context.VehicleType on v.VehicleTypeId equals t.Id
-                          where (v.RegNr.Contains(SearchString) || v.VehicleType.Type.Contains(SearchString))
-                          select new VehicleOverviewViewModel
-                          {
-                              Member = m,
-                              VehicleType = t,
-                              RegNr = v.RegNr,
-                              StartTime =v.StartTime
-                          };
-                }
-           
-            return View(Results);
+            //   var EndTime = DateTime.Now;
+            //var Results = from m in _context.Member
+            //              join v in _context.Vehicle on m.Id equals v.MemberId 
+            //              join t in _context.VehicleType on v.VehicleTypeId equals t.Id
+            //              orderby v.MemberId descending
+            //              select new VehicleOverviewViewModel
+            //              {
+            //                  Member = m,
+            //                  VehicleType=t,
+            //                  RegNr=v.RegNr,
+            //                  VehicleId = v.Id,
+            //                  StartTime=v.StartTime
+            //              };
+            //   if (!string.IsNullOrEmpty(SearchString))
+            //   {
+            //       SearchString = SearchString.ToUpper();
+            //       Results = from m in _context.Member
+            //                 join v in _context.Vehicle on m.Id equals v.MemberId
+            //                 join t in _context.VehicleType on v.VehicleTypeId equals t.Id
+            //                 where (v.RegNr.Contains(SearchString) || v.VehicleType.Type.Contains(SearchString))
+            //                 select new VehicleOverviewViewModel
+            //                 {
+            //                     Member = m,
+            //                     VehicleType = t,
+            //                     RegNr = v.RegNr,
+            //                     VehicleId = v.Id,
+            //                     StartTime = v.StartTime
+            //                 };
+            //       }
+
+          //  return View(Results);
     }
 
 
@@ -67,6 +69,44 @@ namespace Garage25MvcCore22.Controllers
 //        // other assignments
 //    });
 
+             public IActionResult VehicleMemberOverview(string SearchString)
+        {
+            //    var garage25MvcCore22Context = _context.Vehicle.Include(v => v.Member).Include(v => v.VehicleType);
+            //    return View(await garage25MvcCore22Context.ToListAsync());
+
+            var EndTime = DateTime.Now;
+         var Results = from m in _context.Member
+                       join v in _context.Vehicle on m.Id equals v.MemberId 
+                       join t in _context.VehicleType on v.VehicleTypeId equals t.Id
+                       where(v.Parked == true)
+                       orderby v.MemberId descending
+                       select new VehicleOverviewViewModel
+                       {
+                           Member = m,
+                           VehicleType=t,
+                           RegNr=v.RegNr,
+                           VehicleId = v.Id,
+                           StartTime=v.StartTime
+                       };
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                SearchString = SearchString.ToUpper();
+                Results = from m in _context.Member
+                          join v in _context.Vehicle on m.Id equals v.MemberId
+                          join t in _context.VehicleType on v.VehicleTypeId equals t.Id
+                          where (v.RegNr.Contains(SearchString) || v.VehicleType.Type.Contains(SearchString) && v.Parked==true)
+                          select new VehicleOverviewViewModel
+                          {
+                              Member = m,
+                              VehicleType = t,
+                              RegNr = v.RegNr,
+                              VehicleId = v.Id,
+                              StartTime = v.StartTime
+                          };
+                }
+           
+            return View(Results);
+    }
         // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -102,8 +142,12 @@ namespace Garage25MvcCore22.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RegNr,NrOfWheels,Color,Model,Brand,StartTime,Parked,VehicleTypeId,MemberId")] Vehicle vehicle)
         {
+            vehicle.RegNr = vehicle.RegNr.ToUpper();
+
             if (ModelState.IsValid)
             {
+                vehicle.StartTime = DateTime.Now;
+                vehicle.Parked = true;
                 _context.Add(vehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -167,6 +211,88 @@ namespace Garage25MvcCore22.Controllers
             ViewData["VehicleTypeId"] = new SelectList(_context.Set<VehicleType>(), "Id", "Type", vehicle.VehicleTypeId);
             return View(vehicle);
         }
+
+        public async Task<IActionResult> CheckIn(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle.FindAsync(id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            vehicle.Parked = true;
+            vehicle.StartTime = DateTime.Now;
+            _context.Vehicle.Update(vehicle);
+            await _context.SaveChangesAsync();
+
+            TempData["ParkedOk"] = $"Vehcile; reg.Nr. {vehicle.RegNr} succefully parked";
+            return RedirectToAction("VehicleMemberOverview");
+
+        }
+
+        public async Task<IActionResult> CheckOut(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vehicle = await _context.Vehicle
+                .Include(v => v.Member)
+                .Include(v => v.VehicleType)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            if (vehicle.Parked == false)
+            {
+                TempData["NotParked"] = "Vehicle Is Not Parked";
+                return RedirectToAction("VehicleMemberOverview");
+            }
+
+            return View(vehicle);
+        }
+
+        // POST: Vehicles/Delete/5
+        [HttpPost, ActionName("CheckOut")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CheckOutConfirmed(int id)
+        {
+            Receipt receipt = new Receipt();
+
+            //var receipts = _context.Receipt.ToListAsync();
+
+            var vehicle = _context.Vehicle.Include(m => m.Member).FirstOrDefault(p => p.Id == id);            
+            receipt.RegNr = vehicle.RegNr;
+            receipt.MemberName = vehicle.Member.Name;
+            receipt.StartTime = vehicle.StartTime;
+            receipt.EndTime = DateTime.Now;
+
+            var between = receipt.EndTime.Subtract(receipt.StartTime);
+            receipt.parkedTime= (int)Math.Round(between.TotalMinutes) ;
+            var days = receipt.parkedTime / 24 * 3600;
+            var hours = receipt.parkedTime / 60;
+            var minutes = receipt.parkedTime;
+           
+            receipt.ParkedTimeFormatted = string.Format("{0} days, {1} hrs, {2} min", between.Days, between.Hours, between.Minutes);
+            receipt.TotalPrice = (receipt.parkedTime) *1;
+
+            vehicle.Parked = false;
+            _context.Vehicle.Update(vehicle);
+            _context.Receipt.Add(receipt);
+           
+            await _context.SaveChangesAsync();
+
+            return View("CheckOutReceipt", receipt);
+        }
+
 
         // GET: Vehicles/Delete/5
         public async Task<IActionResult> Delete(int? id)
