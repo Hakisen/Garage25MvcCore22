@@ -4,14 +4,17 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Views\ViewModelsViews\**" />
+    <Content Remove="Views\ViewModelsViews\**" />
+    <EmbeddedResource Remove="Views\ViewModelsViews\**" />
+    <None Remove="Views\ViewModelsViews\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Views\MemberOverviewViewModel.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\ViewModelsViews\" />
   </ItemGroup>
 </Project>
