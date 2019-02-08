@@ -9,10 +9,11 @@
 </p>
 @using (Html.BeginForm())
 {
-    <p>
-        Search By Name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
+<p>
+    <i class="fas fa-search"></i>
+    Search By Name: @Html.TextBox("SearchString")
+    <input type="submit" value="Search" />
+</p>
 }
 <table class="table">
     <thead>

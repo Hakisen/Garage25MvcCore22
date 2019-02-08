@@ -21,10 +21,11 @@
 
 @using (Html.BeginForm())
 {
-    <p>
-        Search By Reg.Nr Or Type: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-    </p>
+      <p>
+          <i class="fas fa-search"></i>
+          Search By Reg.Nr Or Type: @Html.TextBox("SearchString")
+          <input type="submit" value="Search" />
+      </p>
 }
 <table class="table">
     <thead>
@@ -50,19 +51,59 @@
 
 
                 <td>
-
+                    <i class="fas fa-user"> </i>
                     @Html.DisplayFor(modelItem => item.Member.Name)
                 </td>
                 <td>
+                    <i class="fas fa-mobile-alt"></i>
                     @Html.DisplayFor(modelItem => item.Member.PhoneNr)
                 </td>
 
-                <td>@Html.DisplayFor(modelItem => item.VehicleType.Type)</td>
+                <td>
+
+                    @switch (item.VehicleType.Type)
+                    {
+                        case "Bus":
+                            <i class="fas fa-bus"></i>;
+                            break;
+                        case "Bicycle":
+                            <i class="fas fa-bicycle"></i>;
+                            break;
+                        case "Car":
+                            <i class="fas fa-car"></i>;
+                            break;
+                        case "PickupTruck":
+                            <i class="fas fa-truck"></i>;
+                            break;
+                        case "Delivery Van":
+                            <i class="fas fa-truck"></i>;
+                            break;
+                        case "Freight Truck":
+                            <i class="fas fa-truck"></i>;
+                            break;
+                        case "Man with a van":
+                            <i class="fas fa-truck"></i>;
+                            break;
+                        case "Motorcycle":
+                            <i class="fas fa-motorcycle"></i>;
+                            break;
+                        case "Pulka":
+                            <i class="fas fa-sleigh"></i>;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    @Html.DisplayFor(modelItem => item.VehicleType.Type)
+                </td>
 
                 <td>@Html.DisplayFor(modelItem => item.RegNr)</td>
 
 
-                <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+                <td>
+                    <i class="fas fa-clock"></i>
+                @Html.DisplayFor(modelItem => item.StartTime)</td>
 
 
 
